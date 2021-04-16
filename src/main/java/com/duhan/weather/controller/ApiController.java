@@ -1,38 +1,32 @@
 package com.duhan.weather.controller;
 
+import com.duhan.weather.service.WeatherService;
+import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 @RestController
+@RequiredArgsConstructor
 public class ApiController {
-    String serviceKey = "nKJLr9q512o8UEWsDGYEgLdMFLNMgUId3e3mqbsMwGLK7Mf9ntFf38YmKFa5Dt3HIY%2B5NBbIoDYh3kBuHqMLiA%3D%3D";
-    String baseDate = "20210415";
-    String baseTime = "0800";
-    String dataType = "JSON";
-    String numOfRows = "250";
-    // 인천시 청학동의 좌표
-    String nx = "55";
-    String ny = "24";
-    String url = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst?"
-            + "serviceKey=" + serviceKey
-            + "&pageNo=1"
-            + "&numOfRows=" + numOfRows
-            + "&dataType=" + dataType
-            + "&base_date=" + baseDate
-            + "&base_time=" + baseTime
-            + "&nx=" + nx
-            + "&ny=" + ny;
+    private final WeatherService weatherService;
 
 
     @GetMapping("/")
-    public String getData(HttpSession session, Model model) {
-        System.out.println(session);
-        return "hello world2";
+    public Long  saveInitData() {
+       return weatherService.saveInitData();
     }
-
-
 }
