@@ -1,4 +1,4 @@
-package com.duhan.weather.controller;
+package com.duhan.weather.web;
 
 import com.duhan.weather.service.WeatherService;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +25,20 @@ public class ApiController {
     private final WeatherService weatherService;
 
 
-    @GetMapping("/")
-    public Long  saveInitData() {
-       return weatherService.saveInitData();
+    @GetMapping("/save")
+    public Long saveInitData() {
+        return weatherService.saveInitData();
     }
+
+    @GetMapping("/delete")
+    public String deleteBeforeData() {
+        return weatherService.deleteBeforeData();
+    }
+
+//    @GetMapping("/init")
+//    public String initialize() {
+//         weatherService.initialize();
+//        return "index";
+//    }
+
 }

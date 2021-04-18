@@ -1,4 +1,4 @@
-package com.duhan.weather.web;
+package com.duhan.weather.web.dto;
 
 import com.duhan.weather.domain.Weather;
 import lombok.AllArgsConstructor;
