@@ -3,10 +3,14 @@ package com.duhan.weather.web;
 import com.duhan.weather.domain.Weather;
 import com.duhan.weather.domain.WeatherRepository;
 import com.duhan.weather.service.WeatherService;
+import com.duhan.weather.web.dto.WeatherListResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,6 +24,8 @@ public class ApiController {
     public Long saveInitData() {
         return weatherService.saveInitData();
     }
+
+    @CrossOrigin
     @GetMapping("/api/all")
     public List<Weather> getAll() {
         return weatherRepository.findAll();
@@ -30,5 +36,11 @@ public class ApiController {
         return weatherService.deleteBeforeData();
     }
 
-
+    @CrossOrigin
+    @GetMapping("/api/weather")
+    public List<WeatherListResponseDto> findByXy(
+            @RequestParam(value = "xy[]") List<Long> xy){
+        System.out.println(xy.get(0).getClass());
+        return weatherService.findByNxAndNy(xy);
+    }
 }

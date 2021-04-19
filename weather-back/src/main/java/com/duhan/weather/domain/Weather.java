@@ -17,6 +17,7 @@ public class Weather {
     private Long id;
 
     private String baseDate;
+
     private String baseTime;
     private String category;
     private String fcstDate;

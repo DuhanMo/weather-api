@@ -2,6 +2,7 @@ package com.duhan.weather.service;
 
 import com.duhan.weather.domain.Weather;
 import com.duhan.weather.domain.WeatherRepository;
+import com.duhan.weather.web.dto.WeatherListResponseDto;
 import com.duhan.weather.web.dto.WeatherSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -62,7 +64,7 @@ public class WeatherService {
         String numOfRows = "180"; // 다음 날 오후 21시 까지의 정보 요청
         // 서울, 부산, 대구, 인천, 광주, 대전, 울산, 세종, 경기, 강원, 충북, 충남, 전북, 전남, 경북, 경남, 제주 의 x,y 좌표
         String[][] location = {{"60", "27"}, {"98", "76"}, {"89", "90"}, {"55", "124"}, {"58", "74"}
-                , {"67", "100"}, {"102", "84"}, {"66", "103"}, {"60", "120"}, {"66", "103"}
+                , {"67", "100"}, {"102", "84"}, {"66", "103"}, {"60", "120"}
                 , {"73", "134"}, {"69", "107"}, {"68", "100"}, {"63", "89"}, {"51", "67"}, {"89", "91"}
                 , {"91", "77"}, {"52", "38"}};
 
@@ -98,5 +100,11 @@ public class WeatherService {
             }
         }
         return null;
+    }
+
+    public List<WeatherListResponseDto> findByNxAndNy(List<Long> xy) {
+        return weatherRepository.findByNxAndNy(xy.get(0), xy.get(1)).stream()
+                .map(WeatherListResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
