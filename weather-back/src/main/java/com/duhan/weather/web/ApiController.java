@@ -40,7 +40,7 @@ public class ApiController {
     @GetMapping("/api/weather")
     public List<WeatherListResponseDto> findByXy(
             @RequestParam(value = "xy[]") List<Long> xy){
-        System.out.println(xy.get(0).getClass());
+        System.out.println(xy);
         return weatherService.findByNxAndNy(xy);
     }
 }

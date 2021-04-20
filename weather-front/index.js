@@ -28,18 +28,18 @@ var app = new Vue({
   },
   methods: {
     fetchData: function (index) {
-      console.log(this.locations[index].xy);
+      console.log(this.locations[index].text + "의 날씨는 --------");
       axios
         .get("http://localhost:8080/api/weather", {
           params: {
-            xy: ["89", "91"],
+            xy: this.locations[index].xy,
           },
           paramsSerializer: (params) => {
             return jQuery.param(params);
           },
         })
-        .then(function (response) {
-          console.log(response);
+        .then(function (res) {
+          console.log(res.data);
         })
         .catch(function (error) {
           console.log(error);
